@@ -8,7 +8,7 @@ window.addEventListener('DOMContentLoaded', function(e){
     if(task_text){
       // console.log(task_text);
       let tbody = document.getElementById("task_list")
-      console.log(tbody)
+      // console.log(tbody)
       let row = tbody.insertRow(-1)
       let td_id = row.insertCell();
       let td_comment = row.insertCell();
