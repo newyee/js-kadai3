@@ -26,6 +26,7 @@ window.addEventListener('DOMContentLoaded', function(e){
       td_delete_button.appendChild(delete_button);
       // console.log(task_text);
       id += 1;
+      document.getElementById("task_text").value = '';
       // console.log('td',td)
       // row_1.appendChild(td);
     }
