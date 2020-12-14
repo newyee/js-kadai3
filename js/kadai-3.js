@@ -1,35 +1,46 @@
 'use strict';
 
-window.addEventListener('DOMContentLoaded', function(e){
+window.addEventListener('DOMContentLoaded', function(){
   let id = 0;
-  document.querySelector("#task_add_button").addEventListener('click',function(){
-    let task_text = document.getElementById("task_text").value
-    // console.log(task_text);
-    if(task_text){
-      // console.log(task_text);
-      let tbody = document.getElementById("task_list")
-      // console.log(tbody)
-      let row = tbody.insertRow(-1)
-      let td_id = row.insertCell();
-      let td_comment = row.insertCell();
-      let td_state_button = row.insertCell();
-      let td_delete_button = row.insertCell();
-      let state_button = document.createElement("button");
-      let delete_button = document.createElement("button");
-      state_button.setAttribute("value","working");
-      delete_button.setAttribute("value","削除");
-      state_button.textContent = "作業中";
-      delete_button.textContent = "削除";
-      td_id.textContent = id;
-      td_comment.textContent = task_text;
-      td_state_button.appendChild(state_button);
-      td_delete_button.appendChild(delete_button);
-      // console.log(task_text);
-      id += 1;
-      document.getElementById("task_text").value = '';
-      // console.log('td',td)
-      // row_1.appendChild(td);
+  let todos = [];
+  document.getElementById('task_add_button').addEventListener('click',function(){
+    let taskElem = document.getElementById('task_text');
+    let taskText = taskElem.value;
+    // console.log('taskText',taskText);
+    if(!task_text){
+      return
     }
+    let todo = {};
+    todo = {
+      task:taskText,
+      status:'作業中'
+    }
+    todos.push(todo);
+    // console.log('todos',todos)
+    // console.log('todos[0]',todos[id].task)
 
+    const tbody = document.getElementById('task_list')
+    // console.log(tbody)
+    const row = tbody.insertRow(-1)
+    let tdId = row.insertCell();
+    let tdComment = row.insertCell();
+    let tdStateButton = row.insertCell();
+    let tdDeleteButton = row.insertCell();
+    let stateButton = document.createElement('button');
+    let deleteButton = document.createElement('button');
+    stateButton.setAttribute('value', 'working');
+    deleteButton.setAttribute('value', '削除');
+    deleteButton.textContent = '削除';
+    tdId.textContent = id;
+    tdComment.textContent = todos[id].task;
+    stateButton.textContent = todos[id].status;
+    tdStateButton.appendChild(stateButton);
+    tdDeleteButton.appendChild(deleteButton);
+    // console.log(task_text);
+    id += 1;
+    taskElem.value = '';
   });
+  // function displayTodos(){
+
+  // }
 });
