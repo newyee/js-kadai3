@@ -7,7 +7,7 @@ window.addEventListener('DOMContentLoaded', function(){
     let taskElem = document.getElementById('task_text');
     let taskText = taskElem.value;
     // console.log('taskText',taskText);
-    if(!task_text){
+    if(!taskText){
       return
     }
     let todo = {};
