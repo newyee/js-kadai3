@@ -5,7 +5,6 @@ window.addEventListener('DOMContentLoaded', () => {
   document.getElementById('task_add_button').addEventListener('click',function(){
     let taskElem = document.getElementById('task_text');
     let taskText = taskElem.value;
-    // console.log('taskText',taskText);
     if(!taskText){
       return
     }
@@ -15,10 +14,7 @@ window.addEventListener('DOMContentLoaded', () => {
       status:'作業中'
     }
     todos.push(todo);
-    // console.log('todos',todos)
-    // console.log('todos[0]',todos[id].task)
     const tbody = document.getElementById('task_list');
-    // console.log(tbody)
     const row = tbody.insertRow(-1);
     let tdId = row.insertCell();
     let tdComment = row.insertCell();
@@ -36,7 +32,6 @@ window.addEventListener('DOMContentLoaded', () => {
     // stateButton.textContent = todos[id].status;
     tdStateButton.appendChild(stateButton);
     tdDeleteButton.appendChild(deleteButton);
-    // console.log(task_text);
     id += 1;
     taskElem.value = '';
   });
