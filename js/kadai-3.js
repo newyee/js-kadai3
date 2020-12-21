@@ -21,10 +21,10 @@ window.addEventListener('DOMContentLoaded', () => {
   const displayData = () => {
     const tbody = document.getElementById('task_list');
     const row = tbody.insertRow(-1);
-    let tdId = row.insertCell();
-    let tdComment = row.insertCell();
-    let tdStateButton = row.insertCell();
-    let tdDeleteButton = row.insertCell();
+    const tdId = row.insertCell();
+    const tdComment = row.insertCell();
+    const tdStateButton = row.insertCell();
+    const tdDeleteButton = row.insertCell();
     const stateButton = createStateButton();
     const deleteButton = createDeleteButton();
     tdId.textContent = id;
