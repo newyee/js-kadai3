@@ -16,11 +16,12 @@ window.addEventListener('DOMContentLoaded', () => {
     displayData();
     id += 1;
     taskElem.value = '';
-
   });
+
   const displayData = () => {
     const tbody = document.getElementById('task_list');
     const row = tbody.insertRow(-1);
+    // console.log(row.rowIndex);
     const tdId = row.insertCell();
     const tdComment = row.insertCell();
     const tdStateButton = row.insertCell();
@@ -42,8 +43,14 @@ window.addEventListener('DOMContentLoaded', () => {
   const createDeleteButton = () => {
     const deleteButton = document.createElement('button');
     deleteButton.setAttribute('value', '削除');
+    deleteButton.onclick = deleteRow;
     deleteButton.textContent = '削除';
     return deleteButton
   }
-
+  const deleteRow = (obj) =>{
+    const tr = obj.parentNode.parentNode;
+    console.log(tr);
+    // trのインデックスを取得して行を削除する
+    tr.parentNode.deleteRow(tr.sectionRowIndex);
+  }
 });
