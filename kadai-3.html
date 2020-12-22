@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel=”stylesheet” type="text/css" href="css/kadai-3.css">
+  <title>課題3</title>
+</head>
+<body>
+  <h1>ToDoリスト</h1>
+  <div>
+    <input type="radio" name="todo_list" id="check_value_left" value="all" >すべて
+    <input type="radio" name="todo_list" id="check_value_middle" value="working" >作業中
+    <input type="radio" name="todo_list" id="check_value_right" value="complete" >完了
+  </div>
+  <table id="task_table">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>コメント</th>
+        <th>状態</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody id="task_list"></tbody>
+  </table>
+  <h3>新規タスクの追加</h3>
+  <input type="text" id="task_text">
+  <button type="submit" id="task_add_button">追加</button>
+</body>
+<script type="text/javascript" src="js/kadai-3.js"></script>
+</html>
