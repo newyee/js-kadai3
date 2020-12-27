@@ -38,6 +38,15 @@ window.addEventListener('DOMContentLoaded', () => {
     const stateButton = document.createElement('button');
     stateButton.setAttribute('value', 'working');
     stateButton.textContent = todos[index].status;
+    stateButton.addEventListener('click', () => {
+      if(todos[index].status === '作業中'){
+        todos[index].status = '完了';
+        stateButton.textContent = todos[index].status;
+      }else{
+        todos[index].status = '作業中';
+        stateButton.textContent = todos[index].status;
+      }
+    })
     return stateButton
   }
 
