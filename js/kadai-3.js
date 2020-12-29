@@ -8,6 +8,9 @@ window.addEventListener('DOMContentLoaded', () => {
   document.getElementById('check_value_middle').addEventListener('click', () => {
     getWorkingStatus(tbody)
   })
+  document.getElementById('check_value_right').addEventListener('click', () => {
+    getCompleteStatus(tbody)
+  })
   document.getElementById('task_add_button').addEventListener('click', () => {
     const taskElem = document.getElementById('task_text');
     const taskText = taskElem.value;
@@ -19,17 +22,45 @@ window.addEventListener('DOMContentLoaded', () => {
       status: '作業中'
     }
     todos.push(todo);
-    displayData(tbody);
+    let workingStatus = document.getElementById('check_value_middle').checked
+    let completeStatus = document.getElementById('check_value_right').checked
+
+    if(workingStatus){
+      getWorkingStatus(tbody)
+    }else if(completeStatus){
+      getCompleteStatus(tbody)
+    }else{
+      displayData(tbody);
+    }
+
     taskElem.value = '';
+
   });
 
-  const getWorkingStatus = (tbody) => {
-    while(tbody.rows[ 0 ] ) tbody.deleteRow( 0 );
+  const getCompleteStatus = (tbody) => {
+    while(tbody.rows[ 0 ]) tbody.deleteRow( 0 );
     for(let i = 0; i < todos.length; ++i){
-      console.log(typeof(todos[i].status))
+      if(todos[i].status !== '完了'){
+        continue;
+      }
+      let row = tbody.insertRow(-1);
+      let tdId = row.insertCell();
+      let tdComment = row.insertCell();
+      let tdStateButton = row.insertCell();
+      let tdDeleteButton = row.insertCell();
+      let stateButton = createStateButton(i);
+      let deleteButton = createDeleteButton(i, tbody);
+      tdId.textContent = i;
+      tdComment.textContent = todos[i].task;
+      tdStateButton.appendChild(stateButton);
+      tdDeleteButton.appendChild(deleteButton);
+    }
+  }
+  const getWorkingStatus = (tbody) => {
+    while(tbody.rows[ 0 ]) tbody.deleteRow( 0 );
+    for(let i = 0; i < todos.length; ++i){
       if(todos[i].status !== '作業中'){
-        console.log('ng')
-        break;
+        continue;
       }
       let row = tbody.insertRow(-1);
       let tdId = row.insertCell();
@@ -47,7 +78,7 @@ window.addEventListener('DOMContentLoaded', () => {
   }
 
   const displayData = (tbody) => {
-    while(tbody.rows[ 0 ] ) tbody.deleteRow( 0 );
+    while(tbody.rows[ 0 ]) tbody.deleteRow( 0 );
     todos.forEach((_, index) => {
       let row = tbody.insertRow(-1);
       let tdId = row.insertCell();
