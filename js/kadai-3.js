@@ -1,10 +1,16 @@
 'use strict';
 window.addEventListener('DOMContentLoaded', () => {
   const todos = [];
+  const tbody = document.getElementById('task_list');
+  document.getElementById('check_value_left').addEventListener('click', () => {
+    displayData(tbody)
+  })
+  document.getElementById('check_value_middle').addEventListener('click', () => {
+    getWorkingStatus(tbody)
+  })
   document.getElementById('task_add_button').addEventListener('click', () => {
     const taskElem = document.getElementById('task_text');
     const taskText = taskElem.value;
-    const tbody = document.getElementById('task_list');
     if(!taskText){
       return
     }
@@ -16,6 +22,29 @@ window.addEventListener('DOMContentLoaded', () => {
     displayData(tbody);
     taskElem.value = '';
   });
+
+  const getWorkingStatus = (tbody) => {
+    while(tbody.rows[ 0 ] ) tbody.deleteRow( 0 );
+    for(let i = 0; i < todos.length; ++i){
+      console.log(typeof(todos[i].status))
+      if(todos[i].status !== '作業中'){
+        console.log('ng')
+        break;
+      }
+      let row = tbody.insertRow(-1);
+      let tdId = row.insertCell();
+      let tdComment = row.insertCell();
+      let tdStateButton = row.insertCell();
+      let tdDeleteButton = row.insertCell();
+      let stateButton = createStateButton(i);
+      let deleteButton = createDeleteButton(i, tbody);
+      tdId.textContent = i;
+      tdComment.textContent = todos[i].task;
+      tdStateButton.appendChild(stateButton);
+      tdDeleteButton.appendChild(deleteButton);
+
+    }
+  }
 
   const displayData = (tbody) => {
     while(tbody.rows[ 0 ] ) tbody.deleteRow( 0 );
