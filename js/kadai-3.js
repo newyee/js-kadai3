@@ -85,7 +85,7 @@ window.addEventListener('DOMContentLoaded', () => {
     stateButton.setAttribute('value', 'working');
     stateButton.textContent = todos[index].status;
     stateButton.addEventListener('click', () => {
-      let leftRadioButton = document.getElementById('check_value_left').checked
+      const leftRadioButton = document.getElementById('check_value_left').checked
       if(leftRadioButton && todos[index].status === '作業中' ){
         todos[index].status = '完了';
         displayData()
