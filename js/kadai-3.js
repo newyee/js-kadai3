@@ -23,8 +23,8 @@ window.addEventListener('DOMContentLoaded', () => {
       status: '作業中'
     }
     todos.push(todo);
-    let workingStatus = document.getElementById('check_value_middle').checked
-    let completeStatus = document.getElementById('check_value_right').checked
+    const workingStatus = document.getElementById('check_value_middle').checked
+    const completeStatus = document.getElementById('check_value_right').checked
 
     if(workingStatus){
       getWorkingStatus()
@@ -37,61 +37,46 @@ window.addEventListener('DOMContentLoaded', () => {
     taskElem.value = '';
 
   });
-
-  const getCompleteStatus = () => {
+  const deleteRow = () => {
     while(tbody.rows[ 0 ]) tbody.deleteRow( 0 );
+  }
+  const createRow = (i) => {
+    const row = tbody.insertRow(-1);
+    const tdId = row.insertCell();
+    const tdComment = row.insertCell();
+    const tdStateButton = row.insertCell();
+    const tdDeleteButton = row.insertCell();
+    const stateButton = createStateButton(i);
+    const deleteButton = createDeleteButton(i);
+    tdId.textContent = i;
+    tdComment.textContent = todos[i].task;
+    tdStateButton.appendChild(stateButton);
+    tdDeleteButton.appendChild(deleteButton);
+  }
+  const getCompleteStatus = () => {
+    deleteRow();
     for(let i = 0; i < todos.length; ++i){
       if(todos[i].status !== '完了'){
         continue;
       }
-      let row = tbody.insertRow(-1);
-      let tdId = row.insertCell();
-      let tdComment = row.insertCell();
-      let tdStateButton = row.insertCell();
-      let tdDeleteButton = row.insertCell();
-      let stateButton = createStateButton(i);
-      let deleteButton = createDeleteButton(i);
-      tdId.textContent = i;
-      tdComment.textContent = todos[i].task;
-      tdStateButton.appendChild(stateButton);
-      tdDeleteButton.appendChild(deleteButton);
+      createRow(i);
     }
   }
   const getWorkingStatus = () => {
-    while(tbody.rows[ 0 ]) tbody.deleteRow( 0 );
+    deleteRow();
     for(let i = 0; i < todos.length; ++i){
       if(todos[i].status !== '作業中'){
         continue;
       }
-      let row = tbody.insertRow(-1);
-      let tdId = row.insertCell();
-      let tdComment = row.insertCell();
-      let tdStateButton = row.insertCell();
-      let tdDeleteButton = row.insertCell();
-      let stateButton = createStateButton(i);
-      let deleteButton = createDeleteButton(i);
-      tdId.textContent = i;
-      tdComment.textContent = todos[i].task;
-      tdStateButton.appendChild(stateButton);
-      tdDeleteButton.appendChild(deleteButton);
+      createRow(i);
 
     }
   }
 
   const displayData = () => {
-    while(tbody.rows[ 0 ]) tbody.deleteRow( 0 );
+    deleteRow();
     todos.forEach((_, index) => {
-      let row = tbody.insertRow(-1);
-      let tdId = row.insertCell();
-      let tdComment = row.insertCell();
-      let tdStateButton = row.insertCell();
-      let tdDeleteButton = row.insertCell();
-      let stateButton = createStateButton(index);
-      let deleteButton = createDeleteButton(index);
-      tdId.textContent = index;
-      tdComment.textContent = todos[index].task;
-      tdStateButton.appendChild(stateButton);
-      tdDeleteButton.appendChild(deleteButton);
+      createRow(index);
     })
   }
 
@@ -125,8 +110,8 @@ window.addEventListener('DOMContentLoaded', () => {
   const createDeleteButton = (index) => {
     const deleteButton = document.createElement('button');
     deleteButton.addEventListener('click', () => {
-      let rightRadioButton = document.getElementById('check_value_right').checked
-      let middleRadioButton = document.getElementById('check_value_middle').checked
+      const rightRadioButton = document.getElementById('check_value_right').checked
+      const middleRadioButton = document.getElementById('check_value_middle').checked
       todos.splice(index, 1)
       if(rightRadioButton){
         getCompleteStatus()
